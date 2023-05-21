@@ -1,0 +1,5 @@
+reset;
+model ampl_files/SequenceAlignment.mod;
+data ampl_files/input.dat;
+option solver cbc;
+solve;
