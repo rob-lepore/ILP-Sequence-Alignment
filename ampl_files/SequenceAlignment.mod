@@ -49,4 +49,3 @@ minimize obj:
 	( sum{j in 1..m} z[j] * gap_p )               + 
 	( sum{i in 1..n} (1 - ( ( sum{j in 1..m} x[i,j] ) + y[i] ) ) * mis_p ) +  #mismatches
 	( v * gap_p ); #ending gaps
-	
