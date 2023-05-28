@@ -4,11 +4,11 @@ param m;                               # length of sequence s2
 param mis_p;                           # mismatch penality
 param gap_p;                           # gap penality
 param r;                               # match reward
-param a{i in 1..n, j in 1..m} binary;  # matrix that indicates whether s1[i] is equal to s2[j]
+param a{i in 1..n, j in 1..m} binary;  # binary parameter that indicates whether s1[i] is equal to s2[j]
 
-var x{i in 1..n, j in 1..m} binary;    # matrix that indicates whether s1[i] and s2[j] are aligned
-var y{i in 1..n} binary;               # array that indicates whether s1[i] is aligned with a gap in s2
-var z{j in 1..m} binary;               # array that indicates whether s2[j] is aligned with a gap in s1
+var x{i in 1..n, j in 1..m} binary;    # binary variable that indicates whether s1[i] and s2[j] are aligned
+var y{i in 1..n} binary;               # binary variable that indicates whether s1[i] is aligned with a gap in s2
+var z{j in 1..m} binary;               # binary variable that indicates whether s2[j] is aligned with a gap in s1
 var v;
 
 # a symbol in a sequence can't be aligned with both another symbol and with a gap at the same time.
@@ -34,7 +34,7 @@ subject to previousGaps{i in 1..n, j in 1..m}:
 	x[i,j] * ( ( sum{k in 1..i} y[k] ) - ( sum{h in 1..j} z[h] ) ) == x[i,j] * (i - j);
 
 # to know the number of final gaps in the shortest sequence, we need to calculate the absolute value 
-# of the difference between the two aligned sequences. Since the absolute value is not a linear function,
+# of the difference between the lengths of the two aligned sequences. Since the absolute value is not a linear function,
 # we add the following two constraints to set the variable v to be the absolute value we need.
 subject to absoluteValueA:
 	-v <= (n + sum{j in 1..m} z[j]) - (m + sum{i in 1..n} y[i]);
